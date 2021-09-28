@@ -100,12 +100,20 @@ export class ChildProcess {
         }
         this.log.info(`Running: ${this.toString()}`)
 
+        const options = {
+            ...this.options,
+            env: {
+                ...this.options?.env,
+                SAM_CLI_TELEMETRY: '0',
+            },
+        }
+
         // Async.
         // See also crossSpawn.spawnSync().
         // Arguments are forwarded[1] to node `child_process` module, see its documentation[2].
         // [1] https://github.com/moxystudio/node-cross-spawn/blob/master/index.js
         // [2] https://nodejs.org/api/child_process.html
-        this.childProcess = crossSpawn.spawn(this.command, this.args, this.options)
+        this.childProcess = crossSpawn.spawn(this.command, this.args, options)
 
         function errorHandler(process: ChildProcess, params: ChildProcessStartArguments, error: Error): void {
             process.processError = error
