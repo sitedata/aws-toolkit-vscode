@@ -103,6 +103,7 @@ export class ChildProcess {
         const options = {
             ...this.options,
             env: {
+                ...process.env,
                 ...this.options?.env,
                 SAM_CLI_TELEMETRY: '0',
             },
