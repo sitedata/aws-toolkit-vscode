@@ -58,7 +58,7 @@ export async function updateEnableExecuteCommandFlag(
         await node.ecs.updateService(node.service.clusterArn!, node.name, enable)
         result = 'Succeeded'
         node.parent.clearChildren()
-        commands.execute('aws.refreshAwsExplorerNode', node.parent)
+        node.parent.refresh()
     } catch (e) {
         result = 'Failed'
         window.showErrorMessage((e as Error).message)
