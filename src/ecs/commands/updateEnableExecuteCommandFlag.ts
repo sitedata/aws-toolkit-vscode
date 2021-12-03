@@ -38,6 +38,17 @@ export async function updateEnableExecuteCommandFlag(
     const redundantActionMessage = enable
         ? localize('AWS.command.ecs.enableEcsExec.alreadyEnabled', 'ECS Exec is already enabled for this service')
         : localize('AWS.command.ecs.enableEcsExec.alreadyDisabled', 'ECS Exec is already disabled for this service')
+    const updatingServiceMessage = enable
+        ? localize(
+              'AWS.ecs.updateService.enable',
+              'Enabling ECS Exec for service: {0}\nA new deployment has started and it may take a while before command execution is ready.',
+              node.service.serviceName
+          )
+        : localize(
+              'AWS.ecs.updateService.disable',
+              'Disabling ECS Exec for service: {0}\nContainers under this service will no longer allow command execution.',
+              node.service.serviceName
+          )
 
     let result: 'Succeeded' | 'Failed' | 'Cancelled'
     if (enable === hasExecEnabled) {
@@ -59,6 +70,7 @@ export async function updateEnableExecuteCommandFlag(
         result = 'Succeeded'
         node.parent.clearChildren()
         node.parent.refresh()
+        window.showInformationMessage(updatingServiceMessage)
     } catch (e) {
         result = 'Failed'
         window.showErrorMessage((e as Error).message)
