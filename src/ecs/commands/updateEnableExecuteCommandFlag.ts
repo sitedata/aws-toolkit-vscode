@@ -41,14 +41,10 @@ export async function updateEnableExecuteCommandFlag(
     const updatingServiceMessage = enable
         ? localize(
               'AWS.ecs.updateService.enable',
-              'Enabling ECS Exec for service: {0}\nA new deployment has started and it may take a while before command execution is ready.',
+              'Enabling ECS Exec for service: "{0}". Waiting for deployment...',
               node.service.serviceName
           )
-        : localize(
-              'AWS.ecs.updateService.disable',
-              'Disabling ECS Exec for service: {0}\nContainers under this service will no longer allow command execution.',
-              node.service.serviceName
-          )
+        : localize('AWS.ecs.updateService.disable', 'Disabling ECS Exec for service: "{0}".', node.service.serviceName)
 
     let result: 'Succeeded' | 'Failed' | 'Cancelled'
     if (enable === hasExecEnabled) {
