@@ -183,7 +183,7 @@
     "AWS.command.ecr.deleteTag": "Delete Tag...",
     "AWS.ecs.enableEcsExec": "Enable Command Execution",
     "AWS.ecs.disableEcsExec": "Disable Command Execution",
-    "AWS.ecs.updateService.enable": "Enabling ECS Exec for service: \"{0}\". Waiting for deployment...",
+    "AWS.ecs.updateService.enable": "Enabling ECS Exec for service: \"{0}\". This may take several minutes.",
     "AWS.ecs.updateService.disable": "Disabling ECS Exec for service: \"{0}\".",
     "AWS.ecs.runCommandInContainer": "Run command in container",
     "AWS.ecs.runCommandInContainer.error": "Failed to execute command in container.",
